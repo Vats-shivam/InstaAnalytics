@@ -1,0 +1,81 @@
+.container {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.head > img {
+  width: 2rem;
+}
+.stat {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: var(--grey);
+}
+.stat > :nth-child(1) {
+  font-size: 0.8rem;
+}
+.stat > :nth-child(2) {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: white;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1.5rem;
+  max-height: 100%; /* Set a maximum height for the container */
+  overflow-y: auto; /* Enable vertical scrollbar if the content overflows */
+  scrollbar-width: thin; /* Set the scrollbar width (for Firefox) */
+  scrollbar-color: transparent transparent; /* Set the scrollbar color (for Firefox) */
+}
+
+/* For WebKit browsers like Chrome and Safari */
+.post::-webkit-scrollbar {
+  width: 8px; /* Set the scrollbar width */
+}
+
+.post::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Set the scrollbar color */
+}
+
+.post::-webkit-scrollbar-track {
+  background-color: transparent; /* Set the scrollbar track color */
+}
+.order{
+  display: flex;
+  margin-bottom: 0.8rem;
+}
+.order>div{
+    width: 100%;   
+}
+.postImg{
+  height:5rem;
+  justify-content: space-between;
+  color: var(--grey);
+  font-size: 0.85rem;
+}
+.postDesc{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/*.orderChart{
+    width: 100%;
+}
+ .orderChart>:nth-child(1)
+{
+    text-align: center;
+} */
+

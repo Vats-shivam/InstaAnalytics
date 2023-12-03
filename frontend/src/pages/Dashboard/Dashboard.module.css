@@ -1,0 +1,98 @@
+.container {
+  width: 100%;
+  max-width: 130rem;
+  padding: 1rem 4rem;
+  display: flex;
+  gap: 2rem;
+  height:80vh;
+}
+
+.dashboard {
+  width: 70%;
+  height:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 2.75rem;
+}
+
+.username{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  /* color: #5dc9ff;   */
+  width:15vw;
+  height: 5vh;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.dashboardHead {
+  display: flex;
+  /* flex-direction: column; */
+  
+  gap: 0.5rem;
+  width:15vw;
+  height: 20vh;
+}
+
+/* .dashboardHead > .head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+} */
+/* .head > :nth-child(1) {
+  font-size: 1.5rem;
+  font-weight: 500;
+} */
+.durationButton > select {
+  border: none;
+  background: var(--orange-gradient);
+  padding: 10px;
+  font-weight: 500;
+  border-radius: 10px;
+  font-size: 0.8rem;
+}
+
+.cards {
+  display: flex;
+  /* width:60vw; */
+  justify-content: space-between;
+}
+
+.card{
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 2rem;
+}
+
+.cardHead{
+  font-size: 1rem;
+}
+
+.cardHead>:nth-child(1)
+{
+  color: rgba(255, 255, 255, 0.835);
+}
+
+.cardHead>:nth-child(2){
+  margin-left: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--green);
+}
+
+
+.cardAmount
+{
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff5d5d;
+}
+
+.statsContainer{
+  width:100%;
+  display:flex;
+  justify-content: space-between;
+}
