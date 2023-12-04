@@ -1,6 +1,8 @@
 import ReactECharts from 'echarts-for-react'
 import * as echarts from 'echarts'
-const StatisticsChart = () => {
+const StatisticsChart = (props) => {
+    console.log(props.Data);
+
 
     const option = {
         color: ['var(--orange)'],
@@ -31,7 +33,7 @@ const StatisticsChart = () => {
             {
                 type: "category",
                 boundaryGap: false,
-                data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+                // data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
             }
         ],
         yAxis: [
@@ -39,7 +41,10 @@ const StatisticsChart = () => {
                 type: "value",
                 splitLine: {
                     show: false,
-                }
+                },
+                interval: (Math.max.apply(null, props.Data)-Math.min.apply(null,props.Data))/5,
+                min: Math.min.apply(null,props.Data),
+                max: Math.max.apply(null,props.Data)
             }
         ],
         series: [
@@ -76,7 +81,7 @@ const StatisticsChart = () => {
                     focus: "series",
                 },
                 showSymbol: false,
-                data: [28000, 19000, 32000, 18000, 41000, 30000, 26000]
+                data: [...props.Data].reverse()
             }
         ]
     }

@@ -85,8 +85,8 @@ const Dashboard = () => {
 
 
       <div className={css.statsContainer}>
-        <Statistics title='Followers' />
-        <Statistics title='Posts' />
+        <Statistics title='Followers' Data={igData.instaStats} />
+        <Statistics title='Posts' Data={igData.instaStats}/>
       </div>
 
     </div>

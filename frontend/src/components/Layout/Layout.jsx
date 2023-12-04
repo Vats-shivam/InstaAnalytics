@@ -40,7 +40,7 @@ const Layout = () => {
             <input type="text" placeholder="Search" />
           </div> */}
 
-          <div className={css.profile}>
+          {/* <div className={css.profile}>
             <img src={profilePic} alt="person image" />
             <div className={css.details}>
               <span>{userName}</span>
@@ -49,8 +49,8 @@ const Layout = () => {
                 <button className={css.logoutbtn} onClick={onLogout}>Logout
                 </button>
               </span>
-            </div>
-          </div>
+            </div> 
+          </div>*/}
 
 
         </div>
