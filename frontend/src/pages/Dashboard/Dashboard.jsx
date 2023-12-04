@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Orders from '../../components/Orders/Orders';
 import Statistics from '../../components/Statistics/Statistics';
 import { cardsData, groupNumber} from '../../data';
@@ -8,8 +8,8 @@ const Dashboard = () => {
   const [period, setPeriod] = useState("w");
   const [igData,setIgData] = useState(null);
   const [isLoading,setIsLoading] = useState(true);
-
-  (async function fetchData() {
+  
+  const fetchData = async function () {
     try {
         // Make a fetch request to the API endpoint
         const response = await fetch('http://localhost:3000');
@@ -27,10 +27,21 @@ const Dashboard = () => {
     } catch (error) {
         console.error('Error fetching data:', error);
     }
-  })();
+  }
+  const [stats,setStats]= useState({});
+
+  useEffect(()=> !isLoading?setStats({
+    followersGrowth: igData.followersGrowth,
+    weeklyFollowers: igData.weeklyFollowers,
+    engagementRate: igData.engagementRate,
+    avgLikes: igData.avgLikes,
+    avgComments: igData.avgComments,
+    followersRatio: igData.followersRatio,
+    commentRatio: igData.commentRatio,
+  }):console.log("Loading"),[igData])
   // isLoading===false?console.log(igData):console.log("hello");
   // fetchData();
-  return(isLoading?<>LOADING</>:<div className={css.container}>
+  return(isLoading?<button onClick={fetchData}>Load</button>:<div className={css.container}>
 
     {/* left side */}
     <div className={css.dashboard}>
@@ -57,7 +68,7 @@ const Dashboard = () => {
           </div>
 
           <div className={css.cardAmount}>
-            <span>{igData.followingCount}</span>
+            <span>{igData.followingsCount}</span>
           </div>
         </div>
         <div className={`${css.dashboardHead} ${css.card} theme-container`}>
@@ -81,7 +92,7 @@ const Dashboard = () => {
     </div>
 
 
-    <Orders />
+    <Orders stats={stats} />
   </div>)
 }
 

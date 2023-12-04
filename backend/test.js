@@ -7,14 +7,14 @@ const port = 3000;
 app.use(cors());
 
 app.get('/',async (req,res) => {
-      const browser = await puppeteer.launch({headless:false});
+      const browser = await puppeteer.launch();
       const page = await browser.newPage();
       // await page.goto('https://www.instagram.com/accounts/login/');
 
       // Agregar encabezados para simular el comportamiento de un navegador real
-      //   await page.setExtraHTTPHeaders({
-      //       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36'
-      //   });
+      await page.setExtraHTTPHeaders({
+             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36'
+      });
   
       // const usernameSelector = '#loginForm > div > div:nth-child(1) > div > label > input';
       // const passwordSelector = '#loginForm > div > div:nth-child(2) > div > label > input';
@@ -31,7 +31,7 @@ app.get('/',async (req,res) => {
   
 
       // await page.goto('https://www.instagram.com/'+username+'/?next=%2F');
-      await page.goto('https://www.instagram.com/sachintendulkar/');
+      await page.goto(`https://www.instagram.com/${'sachintendulkar'}/`);
 
 // Wait for the username header to be present
 await page.waitForSelector('header > section h1');

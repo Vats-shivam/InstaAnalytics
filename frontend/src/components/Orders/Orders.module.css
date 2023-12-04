@@ -29,6 +29,26 @@
   font-weight: 500;
   color: white;
 }
+.cardHead{
+  font-size: 1rem;
+}
+
+.title{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.cardHead>:nth-child(1)
+{
+  color: rgba(255, 255, 255, 0.835);
+}
+
+.cardAmount
+{
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff5d5d;
+}
 
 .post {
   display: flex;
