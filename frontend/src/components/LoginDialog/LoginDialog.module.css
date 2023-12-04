@@ -26,7 +26,7 @@ h1 {
 
 /* Input styling */
 input {
-  width: 50%;
+  width: 100%;
   padding: 2rem;
   margin: 1rem;
   border: 1px solid #ccc; /* Light border color */

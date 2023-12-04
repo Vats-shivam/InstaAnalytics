@@ -18,11 +18,11 @@ const Statistics = (props) => {
     const [stats,setStats]=useState([]);
     useEffect(() => {
         if (props.title === 'Followers') {
-            const data = props.Data.map(item => parseInt(item.followers.substring(0, item.followers.indexOf('\n')).replace(/,/g, ''),10));
+            const data = props?.Data?.map(item => parseInt(item.followers.substring(0, item.followers.indexOf('\n')).replace(/,/g, ''),10));
             setStats(data);
         }
         else if (props.title === 'Posts') {
-            const data = props.Data.map(item => removeAfterNewline(item.media));
+            const data = props?.Data?.map(item => parseInt(removeAfterNewline(item.media).replace(/,/g,''),10));
             setStats(data); 
         }
         

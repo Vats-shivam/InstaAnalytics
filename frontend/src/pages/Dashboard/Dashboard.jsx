@@ -3,6 +3,7 @@ import Orders from '../../components/Orders/Orders';
 import Statistics from '../../components/Statistics/Statistics';
 import { cardsData, groupNumber} from '../../data';
 import css from './Dashboard.module.css';
+import {Spin} from 'antd'
 const Dashboard = () => {
   // const [userId, setUserId] = useState(igData.username);
   const [period, setPeriod] = useState("w");
@@ -12,7 +13,7 @@ const Dashboard = () => {
   const fetchData = async function () {
     try {
         // Make a fetch request to the API endpoint
-        const response = await fetch('http://localhost:3000');
+        const response = await fetch(`http://localhost:3000/${localStorage.getItem('username')}`);
   
         // Check if the response is successful (status code 200-299)
         if (!response.ok) {
@@ -20,6 +21,7 @@ const Dashboard = () => {
         }
   
         // Parse the JSON data from the response
+        console.log(response);
         const data = await response.json();
         console.log(data);
         setIgData(data);
@@ -29,6 +31,13 @@ const Dashboard = () => {
     }
   }
   const [stats,setStats]= useState({});
+  const [render,setRender] = useState(true)
+
+
+  useEffect(()=>{
+    render && localStorage.getItem('username') && fetchData()
+    setRender(false)
+  })
 
   useEffect(()=> !isLoading?setStats({
     followersGrowth: igData.followersGrowth,
@@ -41,14 +50,17 @@ const Dashboard = () => {
   }):console.log("Loading"),[igData])
   // isLoading===false?console.log(igData):console.log("hello");
   // fetchData();
-  return(isLoading?<button onClick={fetchData}>Load</button>:<div className={css.container}>
+  return(
+    <>
+    {isLoading ? <Spin size={48}/> :
+  <div className={css.container}>
 
     {/* left side */}
     <div className={css.dashboard}>
 
       <div className={`${css.username} theme-container`}>
         <div className={css.head}>
-          <span>@{igData.username}</span>
+          <span>@{igData.userName}</span>
         </div>
 
       </div>
@@ -93,7 +105,9 @@ const Dashboard = () => {
 
 
     <Orders stats={stats} />
-  </div>)
+  </div>
+}
+</>)
 }
 
 export default Dashboard

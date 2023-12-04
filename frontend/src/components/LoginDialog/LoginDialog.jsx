@@ -1,8 +1,47 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import css from './LoginDialog.module.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+
+const showError= (error)=>{
+    console.log(error);
+    toast(error.message,{
+        position:"bottom-center",
+        autoClose: 3000,
+        theme:"colored",
+    })
+}
 const LoginDialog = () => {
+    let navigate = useNavigate()
+    const [formData, setFormData] = React.useState({
+        email: "",
+        password: ""
+    })
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("http://localhost:3000/user/login", {
+                email: formData.email,
+                password: formData.password
+            });
+            console.log(response);
+            const data = response.data;
+            console.log(data);
+            if (data.success) {
+                localStorage.setItem('token', data.token)
+                localStorage.setItem('username', data.user.username)
+
+                navigate("/dashboard")
+                window.location.reload()
+            }
+
+        } catch (error) {
+            showError(error.response.data)
+        }
+    }
 
     // useEffect(() => {
     //     function start() {
@@ -15,6 +54,8 @@ const LoginDialog = () => {
     // })
 
     const [popupStyle, showPopup] = useState(css.hide)
+
+    
 
     const popup = () => {
         showPopup(css.loginpopup)
@@ -31,28 +72,31 @@ const LoginDialog = () => {
         console.log(e)
     }
 
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value })
+    }
+
     return (
         <div className={`${css.cover}`}>
-          <div className={css.overlay}></div>
-            <h1>Login</h1>
-            <input type="text" placeholder="username" />
-            <input type="password" placeholder="password" />
+            <div className={css.overlay}></div>
+            <form action="" onSubmit={handleSubmit}>
+                <h1>Login</h1>
+                <input type="email" placeholder="email" name="email" onChange={handleChange} value={formData.email} />
+                <input type="password" placeholder="password" name="password" onChange={handleChange} value={formData.password} />
 
-            <div className={css.actionbtns}>
-    <div className={css.loginbtn}>Log IN</div>
-    <Link to="/register">
-    <div className={css.loginbtn}>Register</div>
-    </Link>
-    </div>
+                <div className={css.actionbtns}>
+                    <button className={css.loginbtn} type="submit">LogIN</button>
+                    <Link to="/register">
+                        <div className={css.loginbtn}>Register</div>
+                    </Link>
+                </div>
+            </form>
 
-            
 
-            <div className={popupStyle}>
-                <h3>Login Failed</h3>
-                <p>Username or password incorrect</p>
-            </div>
-            
-        </div>
+
+            <ToastContainer />
+
+        </div >
     )
 }
 

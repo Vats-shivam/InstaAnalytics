@@ -2,17 +2,21 @@ import moment from "moment/moment";
 import css from "./Layout.module.css";
 import { BiSearch } from "react-icons/bi";
 // import Sidebar from "../Sidebar/Sidebar";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import profilePic from '../../assets/profile.png'
 
 const Layout = () => {
+  let navigate = useNavigate()
 
   const { pathname } = useLocation()
-  const userName="Vats Shivam";
-  const userEmail="vatssshivam@gmail.com";
+  const userName = "Vats Shivam";
+  const userEmail = "vatssshivam@gmail.com";
 
-  const onLogout= ()=>(
-    console.log("logOUT"));
+  const onLogout = () => {
+    console.log("logout");
+    localStorage.removeItem('token');
+    navigate("/login",{replace:true})
+  };
 
 
   return (
@@ -40,22 +44,16 @@ const Layout = () => {
             <input type="text" placeholder="Search" />
           </div> */}
 
-          {/* <div className={css.profile}>
-            <img src={profilePic} alt="person image" />
-            <div className={css.details}>
-              <span>{userName}</span>
-              <span>{userEmail}</span>
-              <span>
-                <button className={css.logoutbtn} onClick={onLogout}>Logout
-                </button>
-              </span>
-            </div> 
-          </div>*/}
+          {localStorage.getItem('token') && <div className={css.profile}>
 
+            <span>
+              <button className={css.logoutbtn} onClick={onLogout}>Logout
+              </button>
+            </span>
+          </div>
 
+          }
         </div>
-
-
         <div className={css.content}>
           <Outlet />
         </div>
